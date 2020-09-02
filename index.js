@@ -104,17 +104,18 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
+  const reactedMessage = reaction.message.content.split(' ');
+  let addedRole;
+  let role;
 
   if (reaction.partial) {
     try {
       await reaction.fetch();
     } catch (error) {
-      console.log("Couldn't fetch the message: ", error);
+      console.error(`Couldn't fetch the message: ${error}`);
       return;
     }
   }
-
-  const reactedMessage = reaction.message.content.split(' ');
 
   if (reactedMessage.length === 7) {
     addedRole = reactedMessage[5];
@@ -144,6 +145,9 @@ bot.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
+  const reactedMessage = reaction.message.content.split(' ');
+  let addedRole;
+  let role;
 
   if (reaction.partial) {
     try {
@@ -153,14 +157,11 @@ bot.on('messageReactionRemove', async (reaction, user) => {
       return;
     }
   }
-
-  var reactedMessage = reaction.message.content.split(' ');
-
-  if (reactedMessage.length == 7) {
+  if (reactedMessage.length === 7) {
     addedRole = reactedMessage[5];
-  } else if (reactedMessage.length == 8) {
+  } else if (reactedMessage.length === 8) {
     addedRole = reactedMessage[5] + ' ' + reactedMessage[6];
-  } else if (reactedMessage.length == 9) {
+  } else if (reactedMessage.length === 9) {
     addedRole = reactedMessage[5] + ' ' + reactedMessage[6] + ' ' + reactedMessage[7];
   }
 
