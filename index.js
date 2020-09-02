@@ -1,72 +1,9 @@
 const Discord = require('discord.js');
 require('dotenv').config();
+const { sRoles, cRoles } = require('./roles.js');
 
 const bot = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
-
-const sRoles = [
-  'DJ',
-  'Total War',
-  'Artist',
-  'Rocket League',
-  'TFT',
-  'Mount & Blade',
-  'For Honor',
-  'Among Us',
-  'SCP',
-  'League of Legends',
-  'Minecraft',
-  'TF2',
-  'Hearthstone',
-  'Deceit',
-  'Arma',
-  'Stellaris',
-  'Tarkov',
-  'Switch',
-  'Rimworld',
-  'Valorant',
-  'Brawlhalla',
-  'Overwatch',
-  'GTA',
-  'CSGO',
-  'Civilization',
-  'World of Warcraft',
-  'Rainbow Six Siege',
-  'Anno',
-  'Screeps',
-  'Brætspil',
-];
-const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink'];
-
-function generateGameMessage() {
-  sRoles.forEach((role) => {
-    bot.channels.cache
-      .get('749414294487302254')
-      .send(`React below to get the\`\` ${role} \`\`role!`)
-      .then((s) => {
-        s.react('✔');
-      });
-  });
-}
-
-function generateColourMessage() {
-  cRoles.forEach((role) => {
-    bot.channels.cache
-      .get('749419361109934182')
-      .send(`React below to get the\`\` ${role} \`\`role!`)
-      .then((s) => {
-        s.react('✔');
-      });
-  });
-}
-
-function generateRoleMessage(role) {
-  bot.channels.cache
-    .get('749414294487302254')
-    .send(`React below to get the\`\` ${role} \`\`role!`)
-    .then((s) => {
-      s.react('✔');
-    });
-}
+const { generateGameMessage, generateColourMessage, generateRoleMessage } = require('./functions.js');
 
 bot.on('ready', () => {
   console.log(`Connected as ${bot.user.id}`);
@@ -116,8 +53,6 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
-  let addedRole;
-  let role;
 
   if (reaction.partial) {
     try {
@@ -128,38 +63,25 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     }
   }
 
-  const reactedMessage = reaction.message.content.split(' ');
+  const reactedMessage = reaction.message.content.split('``');
+  const roleToBeAdded = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
 
-  if (reactedMessage.length === 7) {
-    addedRole = reactedMessage[5];
-  } else if (reactedMessage.length === 8) {
-    addedRole = reactedMessage[5] + ' ' + reactedMessage[6];
-  } else if (reactedMessage.length === 9) {
-    addedRole = reactedMessage[5] + ' ' + reactedMessage[6] + ' ' + reactedMessage[7];
-  }
-
-  guild.roles.cache.forEach((roles) => {
-    if (roles.name === addedRole) {
-      role = roles;
-    }
-  });
-
-  if (!role) {
+  if (!roleToBeAdded) {
     console.log('No role supplied');
+  } else {
+    console.log(
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${
+        reaction.emoji
+      } & removed the role ${reactedMessage[1].trim()}`
+    );
+    member.roles.add(roleToBeAdded);
   }
-
-  console.log(
-    `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Reacted with ${reaction._emoji}  & added the role ${addedRole}`
-  );
-  member.roles.add(role);
 });
 
 bot.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
-  let addedRole;
-  let role;
 
   if (reaction.partial) {
     try {
@@ -170,28 +92,19 @@ bot.on('messageReactionRemove', async (reaction, user) => {
     }
   }
 
-  const reactedMessage = reaction.message.content.split(' ');
+  const reactedMessage = reaction.message.content.split('``');
+  const roleToBeRemoved = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
 
-  if (reactedMessage.length === 7) {
-    addedRole = reactedMessage[5];
-  } else if (reactedMessage.length === 8) {
-    addedRole = reactedMessage[5] + ' ' + reactedMessage[6];
-  } else if (reactedMessage.length === 9) {
-    addedRole = reactedMessage[5] + ' ' + reactedMessage[6] + ' ' + reactedMessage[7];
-  }
-
-  guild.roles.cache.forEach((roles) => {
-    if (roles.name === addedRole) {
-      role = roles;
-    }
-  });
-
-  if (!role) {
+  if (!roleToBeRemoved) {
     console.log('No role supplied');
+  } else {
+    console.log(
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${
+        reaction.emoji
+      } & removed the role ${reactedMessage[1].trim()}`
+    );
+    member.roles.remove(roleToBeRemoved);
   }
-
-  console.log(`${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${reaction._emoji} & removed the role ${addedRole}`);
-  member.roles.remove(role);
 });
 
 bot.login(process.env.BOTTOKEN);
