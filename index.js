@@ -7,7 +7,7 @@ let cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue'
 
 bot.on('ready', () => {
     console.log("Connected as " + bot.user.tag)
-    bot.user.setActivity("4D Chess", {type: "PLAYING"})
+    bot.user.setActivity("games", {type: "PLAYING"})
 
     bot.guilds.cache.forEach((guild) => {
         console.log(guild.name)
