@@ -96,6 +96,8 @@ bot.on('message', (msg) => {
     return false;
   });
 
+  console.log(isAuthorMod);
+
   if (isAuthorMod && input[0] === 'gameGen' && input.length === 1) {
     generateGameMessage();
   }
