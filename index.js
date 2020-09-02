@@ -71,7 +71,7 @@ function generateRoleMessage(role) {
 bot.on('ready', () => {
   console.log(`Connected as ${bot.user.id}`);
 
-  bot.user.setActivity('4D Chess', { type: 'PLAYING' });
+  bot.user.setActivity('5D Chess', { type: 'PLAYING' });
 
   bot.guilds.cache.forEach((guild) => {
     console.log(guild.name);
