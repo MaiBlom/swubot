@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 require('dotenv').config();
-const { sRoles, cRoles } = require('./roles.js');
 
 const bot = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
 const { generateGameMessage, generateColourMessage, generateRoleMessage } = require('./functions.js');
