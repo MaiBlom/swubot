@@ -104,7 +104,6 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
-  const reactedMessage = reaction.message.content.split(' ');
   let addedRole;
   let role;
 
@@ -116,6 +115,8 @@ bot.on('messageReactionAdd', async (reaction, user) => {
       return;
     }
   }
+
+  const reactedMessage = reaction.message.content.split(' ');
 
   if (reactedMessage.length === 7) {
     addedRole = reactedMessage[5];
@@ -145,7 +146,6 @@ bot.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
-  const reactedMessage = reaction.message.content.split(' ');
   let addedRole;
   let role;
 
@@ -157,6 +157,9 @@ bot.on('messageReactionRemove', async (reaction, user) => {
       return;
     }
   }
+
+  const reactedMessage = reaction.message.content.split(' ');
+
   if (reactedMessage.length === 7) {
     addedRole = reactedMessage[5];
   } else if (reactedMessage.length === 8) {
