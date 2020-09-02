@@ -51,7 +51,7 @@ let cRoles = [
 
 bot.on("ready", () => {
   console.log("Connected as " + bot.user.tag);
-  bot.user.setActivity("SWU ITU", { type: "PLAYING" });
+  bot.user.setActivity("4D Chess", { type: "PLAYING" });
 
   bot.guilds.cache.forEach((guild) => {
     console.log(guild.name);
