@@ -89,8 +89,8 @@ bot.on('ready', () => {
 
 bot.on('message', (msg) => {
   const input = msg.content.split(' ');
+  console.log(msg.member.roles.cache.name);
   const isAuthorMod = msg.member.roles.forEach((role) => {
-    console.log(role.name);
     if (role.name === 'Moderator') {
       return true;
     }
