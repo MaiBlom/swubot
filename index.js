@@ -89,14 +89,23 @@ bot.on('ready', () => {
 
 bot.on('message', (msg) => {
   const input = msg.content.split(' ');
-  if (msg.channel.id === '749414294487302254' && msg.author.id === '743270304880787488' && input[0] === 'gameGen' && input.length === 1) {
+  const isAuthorMod = msg.member.roles.cache.forEach((role) => {
+    if (role.name === 'Moderator') {
+      return true;
+    }
+    return false;
+  });
+
+  if (isAuthorMod && input[0] === 'gameGen' && input.length === 1) {
     generateGameMessage();
   }
-  if (msg.channel.id === '749419361109934182' && msg.author.id === '743270304880787488' && input[0] === 'colourGen') {
+  if (isAuthorMod && input[0] === 'colourGen') {
     generateColourMessage();
   }
-  if (msg.channel.id === '749414294487302254' && msg.author.id === '743270304880787488' && input[0] === 'roleGen' && input.length > 1) {
-    generateRoleMessage(input[1]);
+  if (isAuthorMod && input[0] === 'roleGen' && input.length > 1) {
+    const roleInput = input.shift;
+    console.log(roleInput);
+    generateRoleMessage(roleInput);
   }
 });
 
