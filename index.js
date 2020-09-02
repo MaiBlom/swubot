@@ -114,13 +114,13 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     }
   }
 
-  var reactedMessage = reaction.message.content.split(' ');
+  const reactedMessage = reaction.message.content.split(' ');
 
-  if (reactedMessage.length == 7) {
+  if (reactedMessage.length === 7) {
     addedRole = reactedMessage[5];
-  } else if (reactedMessage.length == 8) {
+  } else if (reactedMessage.length === 8) {
     addedRole = reactedMessage[5] + ' ' + reactedMessage[6];
-  } else if (reactedMessage.length == 9) {
+  } else if (reactedMessage.length === 9) {
     addedRole = reactedMessage[5] + ' ' + reactedMessage[6] + ' ' + reactedMessage[7];
   }
 
