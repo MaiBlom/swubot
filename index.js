@@ -2,7 +2,16 @@ const Discord = require('discord.js');
 require('dotenv').config();
 
 const bot = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
-const { generateGameMessage, generateColourMessage, generateRoleMessage } = require('./functions.js');
+// const { generateGameMessage, generateColourMessage, generateRoleMessage } = require('./functions.js');
+
+function generateRoleMessage(role, channel) {
+  bot.channels.cache
+    .get(channel)
+    .send(`React below to get the \`\`${role}\`\` role!`)
+    .then((s) => {
+      s.react('✔');
+    });
+}
 
 bot.on('ready', () => {
   console.log(`Connected as ${bot.user.id}`);
@@ -25,26 +34,14 @@ bot.on('ready', () => {
 
 bot.on('message', (msg) => {
   const input = msg.content.split(' ');
-  console.log(msg.member.roles.cache.get());
-  const isAuthorMod = msg.member.roles.cache.forEach((role) => {
-    if (role.name === 'Moderator') {
-      return true;
-    }
-    return false;
-  });
+  const msgChannel = msg.channel.id;
+  console.log(msgChannel);
+  const msgMember = msg.member.roles.cache.find((role) => role.name === 'Moderator');
+  console.log(msgMember.name);
 
-  console.log(isAuthorMod);
-
-  if (isAuthorMod && input[0] === 'gameGen' && input.length === 1) {
-    generateGameMessage();
-  }
-  if (isAuthorMod && input[0] === 'colourGen') {
-    generateColourMessage();
-  }
-  if (isAuthorMod && input[0] === 'roleGen' && input.length > 1) {
-    const roleInput = input.shift;
-    console.log(roleInput);
-    generateRoleMessage(roleInput);
+  if (msgMember.name === 'Moderator' && input[0] === 'roleGen') {
+    console.log(`Messenger is a ${msgMember.name}`);
+    generateRoleMessage(input.shift(), msgChannel);
   }
 });
 
@@ -69,9 +66,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     console.log('No role supplied');
   } else {
     console.log(
-      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${
-        reaction.emoji
-      } & removed the role ${reactedMessage[1].trim()}`
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Removed ${reaction.emoji} & added the role ${roleToBeAdded.name}  `
     );
     member.roles.add(roleToBeAdded);
   }
@@ -98,9 +93,7 @@ bot.on('messageReactionRemove', async (reaction, user) => {
     console.log('No role supplied');
   } else {
     console.log(
-      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${
-        reaction.emoji
-      } & removed the role ${reactedMessage[1].trim()}`
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${reaction.emoji} & removed the role ${roleToBeRemoved.name}`
     );
     member.roles.remove(roleToBeRemoved);
   }
