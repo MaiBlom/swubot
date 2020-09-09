@@ -29,6 +29,7 @@ const sRoles = [
   'Anno',
   'Screeps',
   'Brætspil',
+  'Dungeons & Dragons',
 ];
 const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink'];
 

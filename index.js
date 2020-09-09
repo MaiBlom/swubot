@@ -33,15 +33,15 @@ bot.on('ready', () => {
 });
 
 bot.on('message', (msg) => {
+  if (msg.member.user.bot) return;
   const input = msg.content.split(' ');
   const msgChannel = msg.channel.id;
-  console.log(msgChannel);
-  const msgMember = msg.member.roles.cache.find((role) => role.name === 'Moderator');
-  console.log(msgMember.name);
+  const msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator').name;
 
-  if (msgMember.name === 'Moderator' && input[0] === 'roleGen') {
-    console.log(`Messenger is a ${msgMember.name}`);
-    generateRoleMessage(input.shift(), msgChannel);
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'roleGen' && input.length > 1) {
+    input.shift();
+    const role = input.join(' ');
+    generateRoleMessage(role, msgChannel);
   }
 });
 
@@ -66,7 +66,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     console.log('No role supplied');
   } else {
     console.log(
-      `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Removed ${reaction.emoji} & added the role ${roleToBeAdded.name}  `
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBeAdded.name}  `
     );
     member.roles.add(roleToBeAdded);
   }
