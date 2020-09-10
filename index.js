@@ -2,7 +2,40 @@ const Discord = require('discord.js');
 require('dotenv').config();
 
 const bot = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
-// const { generateGameMessage, generateColourMessage, generateRoleMessage } = require('./functions.js');
+const { gRoles, mRoles, cRoles } = require('./roles.js');
+
+function generateGameMessages(channel) {
+  gRoles.forEach((role) => {
+    bot.channels.cache
+      .get(channel)
+      .send(`React below to get the \`\`${role}\`\` role!`)
+      .then((s) => {
+        s.react('✔');
+      });
+  });
+}
+
+function generateColourMessages(channel) {
+  cRoles.forEach((role) => {
+    bot.channels.cache
+      .get(channel)
+      .send(`React below to get the \`\`${role}\`\` role!`)
+      .then((s) => {
+        s.react('✔');
+      });
+  });
+}
+
+function generateMiscMessages(channel) {
+  mRoles.forEach((role) => {
+    bot.channels.cache
+      .get(channel)
+      .send(`React below to get the \`\`${role}\`\` role!`)
+      .then((s) => {
+        s.react('✔');
+      });
+  });
+}
 
 function generateRoleMessage(role, channel) {
   bot.channels.cache
@@ -42,6 +75,18 @@ bot.on('message', (msg) => {
     input.shift();
     const role = input.join(' ');
     generateRoleMessage(role, msgChannel);
+    return;
+  }
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'gameGen' && input.length === 1) {
+    generateGameMessages(msgChannel);
+    return;
+  }
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'colourGen' && input.length === 1) {
+    generateColourMessages(msgChannel);
+    return;
+  }
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'miscGen' && input.length === 1) {
+    generateMiscMessages(msgChannel);
   }
 });
 

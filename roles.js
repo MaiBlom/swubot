@@ -1,7 +1,5 @@
-const sRoles = [
-  'DJ',
+const gRoles = [
   'Total War',
-  'Artist',
   'Rocket League',
   'TFT',
   'Mount & Blade',
@@ -31,6 +29,7 @@ const sRoles = [
   'Brætspil',
   'Dungeons & Dragons',
 ];
+const mRoles = ['Artist', 'Senior', 'DJ'];
 const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink'];
 
-module.exports = { sRoles, cRoles };
+module.exports = { gRoles, mRoles, cRoles };
