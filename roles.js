@@ -29,7 +29,7 @@ const gRoles = [
   'Brætspil',
   'Dungeons & Dragons',
 ];
-const mRoles = ['Artist', 'Senior', 'DJ'];
+const mRoles = ['Artist', 'Boomer', 'DJ'];
 const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink'];
 
 module.exports = { gRoles, mRoles, cRoles };
