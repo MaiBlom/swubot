@@ -5,6 +5,7 @@ const bot = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
 function generateGameMessages(channel) {
+  bot.channels.cache.get(channel).send(`**Game roles:**`);
   gRoles.forEach((role) => {
     bot.channels.cache
       .get(channel)
@@ -16,6 +17,7 @@ function generateGameMessages(channel) {
 }
 
 function generateColourMessages(channel) {
+  bot.channels.cache.get(channel).send(`**Colour roles:**`);
   cRoles.forEach((role) => {
     bot.channels.cache
       .get(channel)
@@ -27,6 +29,7 @@ function generateColourMessages(channel) {
 }
 
 function generateMiscMessages(channel) {
+  bot.channels.cache.get(channel).send(`**Misc. roles:**`);
   mRoles.forEach((role) => {
     bot.channels.cache
       .get(channel)
@@ -72,20 +75,24 @@ bot.on('message', (msg) => {
   const msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator').name;
 
   if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'roleGen' && input.length > 1) {
+    msg.delete();
     input.shift();
     const role = input.join(' ');
     generateRoleMessage(role, msgChannel);
     return;
   }
   if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'gameGen' && input.length === 1) {
+    msg.delete();
     generateGameMessages(msgChannel);
     return;
   }
   if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'colourGen' && input.length === 1) {
+    msg.delete();
     generateColourMessages(msgChannel);
     return;
   }
   if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'miscGen' && input.length === 1) {
+    msg.delete();
     generateMiscMessages(msgChannel);
   }
 });
