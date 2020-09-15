@@ -14,6 +14,7 @@ function generateGameMessages(channel) {
         s.react('✔');
       });
   });
+  bot.channels.cache.get(channel).send(` `);
 }
 
 function generateColourMessages(channel) {
@@ -26,6 +27,7 @@ function generateColourMessages(channel) {
         s.react('✔');
       });
   });
+  bot.channels.cache.get(channel).send(` `);
 }
 
 function generateMiscMessages(channel) {
@@ -38,6 +40,7 @@ function generateMiscMessages(channel) {
         s.react('✔');
       });
   });
+  bot.channels.cache.get(channel).send(` `);
 }
 
 function generateRoleMessage(role, channel) {
