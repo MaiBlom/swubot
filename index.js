@@ -14,7 +14,7 @@ function generateGameMessages(channel) {
         s.react('✔');
       });
   });
-  bot.channels.cache.get(channel).send(` `);
+  bot.channels.cache.get(channel).send(`\n`);
 }
 
 function generateColourMessages(channel) {
@@ -27,7 +27,7 @@ function generateColourMessages(channel) {
         s.react('✔');
       });
   });
-  bot.channels.cache.get(channel).send(` `);
+  bot.channels.cache.get(channel).send(`\n`);
 }
 
 function generateMiscMessages(channel) {
@@ -40,7 +40,7 @@ function generateMiscMessages(channel) {
         s.react('✔');
       });
   });
-  bot.channels.cache.get(channel).send(` `);
+  bot.channels.cache.get(channel).send(`\n`);
 }
 
 function generateRoleMessage(role, channel) {
