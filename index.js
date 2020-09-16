@@ -75,28 +75,32 @@ bot.on('message', (msg) => {
   if (msg.member.user.bot) return;
   const input = msg.content.split(' ');
   const msgChannel = msg.channel.id;
-  const msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator').name;
+  const msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator');
 
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
-    msg.delete();
-    input.shift();
-    const role = input.join(' ');
-    generateRoleMessage(role, msgChannel);
-    return;
-  }
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!gameGen' && input.length === 1) {
-    msg.delete();
-    generateGameMessages(msgChannel);
-    return;
-  }
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!colourGen' && input.length === 1) {
-    msg.delete();
-    generateColourMessages(msgChannel);
-    return;
-  }
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!miscGen' && input.length === 1) {
-    msg.delete();
-    generateMiscMessages(msgChannel);
+  try {
+    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
+      msg.delete();
+      input.shift();
+      const role = input.join(' ');
+      generateRoleMessage(role, msgChannel);
+      return;
+    }
+    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!gameGen' && input.length === 1) {
+      msg.delete();
+      generateGameMessages(msgChannel);
+      return;
+    }
+    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!colourGen' && input.length === 1) {
+      msg.delete();
+      generateColourMessages(msgChannel);
+      return;
+    }
+    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!miscGen' && input.length === 1) {
+      msg.delete();
+      generateMiscMessages(msgChannel);
+    }
+  } catch (error) {
+    console.log(error);
   }
   if(msg.content.toUpperCase().includes("JIF")) {
     msg.delete();
