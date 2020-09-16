@@ -77,26 +77,29 @@ bot.on('message', (msg) => {
   const msgChannel = msg.channel.id;
   const msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator').name;
 
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'roleGen' && input.length > 1) {
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
     msg.delete();
     input.shift();
     const role = input.join(' ');
     generateRoleMessage(role, msgChannel);
     return;
   }
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'gameGen' && input.length === 1) {
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!gameGen' && input.length === 1) {
     msg.delete();
     generateGameMessages(msgChannel);
     return;
   }
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'colourGen' && input.length === 1) {
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!colourGen' && input.length === 1) {
     msg.delete();
     generateColourMessages(msgChannel);
     return;
   }
-  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === 'miscGen' && input.length === 1) {
+  if (msgMemberRole.valueOf() === 'Moderator' && input[0] === '!miscGen' && input.length === 1) {
     msg.delete();
     generateMiscMessages(msgChannel);
+  }
+  if(msg.toUpperCase().includes("JIF")) {
+    msg.delete();
   }
 });
 
