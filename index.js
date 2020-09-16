@@ -98,7 +98,7 @@ bot.on('message', (msg) => {
     msg.delete();
     generateMiscMessages(msgChannel);
   }
-  if(msg.toUpperCase().includes("JIF")) {
+  if(msg.content.toUpperCase().includes("JIF")) {
     msg.delete();
   }
 });
