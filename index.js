@@ -102,9 +102,6 @@ bot.on('message', (msg) => {
   } catch (error) {
     console.log(error);
   }
-  if(msg.content.toUpperCase().includes("JIF")) {
-    msg.delete();
-  }
 });
 
 bot.on('messageReactionAdd', async (reaction, user) => {
