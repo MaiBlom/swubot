@@ -28,7 +28,7 @@ const gRoles = [
   'Screeps',
   'Brætspil',
   'Dungeons & Dragons',
-  "Skribbl.io"
+  'Skribbl.io'
 ];
 const mRoles = ['Artist', 'Boomer', 'DJ'];
 const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink'];
