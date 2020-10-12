@@ -102,7 +102,7 @@ bot.on('message', (msg) => {
     if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!msgDel' && input.length === 2) {
       msg.delete();
       input.shift();
-      const msgDelAmount = parseInt(input, 10);
+      let msgDelAmount = parseInt(input, 10);
       for(msgDelAmount; msgDelAmount > 0; msgDelAmount--) {
         let lm = msg.channel.lastMessage;
         bot.channels.cache.get(msgChannel).send(msgDelAmount);
