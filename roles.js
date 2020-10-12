@@ -28,9 +28,11 @@ const gRoles = [
   'Screeps',
   'Brætspil',
   'Dungeons & Dragons',
-  'Skribbl.io'
+  'Skribbl.io',
+  'Pummel Party',
+  'Jackbox'
 ];
-const mRoles = ['Artist', 'Boomer', 'DJ'];
-const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink'];
+const mRoles = ['Artist', 'Boomer', 'DJ', 'Hardcore Fupmager'];
+const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink', 'Lime Green'];
 
 module.exports = { gRoles, mRoles, cRoles };
