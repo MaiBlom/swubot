@@ -103,7 +103,7 @@ bot.on('message', (msg) => {
       msg.delete();
       input.shift();
       const msgDelAmount = parseInt(input, 10);
-      for(msgDelAmount; msgDelAmount > 0; i--) {
+      for(msgDelAmount; msgDelAmount > 0; msgDelAmount--) {
         let lm = msg.channel.lastMessage;
         bot.channels.cache.get(msgChannel).send(msgDelAmount);
         lm.delete();
