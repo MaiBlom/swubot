@@ -99,7 +99,7 @@ bot.on('message', (msg) => {
       msg.delete();
       generateMiscMessages(msgChannel);
     }
-    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!msgDel' && input.length === 2) {
+    /*if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!msgDel' && input.length === 2) {
       msg.delete();
       input.shift();
       let msgDelAmount = parseInt(input, 10);
@@ -108,7 +108,7 @@ bot.on('message', (msg) => {
         bot.channels.cache.get(msgChannel).send(msgDelAmount);
         lm.delete();
       }
-    }
+    }*/
   } catch (error) {
     console.log(error);
   }
