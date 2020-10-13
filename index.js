@@ -112,7 +112,6 @@ bot.on('message', (msg) => {
           if (input.length === 2) {
             msg.delete();
             input.shift();
-            console.log(input);
             let msgDelAmount = parseInt(input, 10);
             msg.channel.bulkDelete(msgDelAmount)
               .catch(console.error);
