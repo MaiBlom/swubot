@@ -76,10 +76,10 @@ bot.on('message', (msg) => {
   const input = msg.content.split(' ');
   const msgChannel = msg.channel.id;
   let msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator');
-  if(typeof msgMemberRole === undefined) msgMemberRole = ' ';
+  if(typeof msgMemberRole === undefined) msgMemberRole = msg.channel.roles.cache.find((role) => role.name === 'Dummy');
 
   try {
-    if (msg.member.roles.cache.find((role) => role.name ==='Moderator').name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
+    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
       msg.delete();
       input.shift();
       const role = input.join(' ');
