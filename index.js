@@ -76,8 +76,8 @@ bot.on('message', (msg) => {
   const input = msg.content.split(' ');
   const msgChannel = msg.channel.id;
   let msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator');
-  if(typeof msgMemberRole === undefined) msgMemberRole = msg.channel.roles.cache.find((role) => role.name === 'Dummy');
-  console.log(guild.roles.cache.find((role) => role.name === 'Dummy'));
+  if(typeof msgMemberRole === 'undefined') msgMemberRole = msg.guild.roles.cache.find((role) => role.name === 'Dummy');
+  console.log(msg.guild.roles.cache.find((role) => role.name === 'Dummy'));
 
   try {
     if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
