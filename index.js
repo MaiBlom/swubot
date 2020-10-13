@@ -75,7 +75,7 @@ bot.on('message', (msg) => {
   if (msg.member.user.bot) return;
   const input = msg.content.split(' ');
   const msgChannel = msg.channel.id;
-  let msgMemberRole = msg.member.roles.cache.find((name) => role.name === 'Moderator');
+  let msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator');
   if(msgMemberRole === undefined) msgMemberRole = " ";
 
   try {
