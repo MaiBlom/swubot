@@ -77,10 +77,10 @@ bot.on('message', (msg) => {
   const msgChannel = msg.channel.id;
   //const msgMemberRole = msg.member.roles.cache.find((name) => role.name === 'Moderator');
 
-  console.log(msg.member.roles.cache.name.valueOf());
+  console.log(msg.member.roles.cache.find((name) => role.name ==='Moderator').name.valueOf());
 
   try {
-    if (msg.member.roles.cache.name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
+    if (msg.member.roles.cache.find((name) => role.name ==='Moderator').name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
       msg.delete();
       input.shift();
       const role = input.join(' ');
