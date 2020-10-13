@@ -80,7 +80,7 @@ bot.on('message', (msg) => {
 
   try {
     if (msgMemberRole.name.valueOf() === 'Moderator' && input[0].charAt(0) === '&') {
-      input[0].substring(1);
+      input[0] = input[0].substring(1);
       console.log(input[0]);
       console.log(input[0].substring(1));
       console.log(input[1]);
@@ -115,6 +115,7 @@ bot.on('message', (msg) => {
           if (input.length === 2) {
             msg.delete();
             input.shift();
+            console.log(input);
             let msgDelAmount = parseInt(input, 10);
             msg.channel.bulkDelete(msgDelAmount)
               .catch(console.error);
