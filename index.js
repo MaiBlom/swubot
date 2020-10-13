@@ -126,7 +126,7 @@ bot.on('message', (msg) => {
 
 bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
-  console.log(reaction.message.channel.id);
+  if (reaction.message.channel.id !== 755502310355894432) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
 
@@ -154,7 +154,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 
 bot.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return;
-  console.log(reaction.message.channel.id);
+  if (reaction.message.channel.id !== 755502310355894432) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
 
