@@ -77,6 +77,8 @@ bot.on('message', (msg) => {
   const msgChannel = msg.channel.id;
   const msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator');
 
+  console.log(msgMemberRole);
+
   try {
     if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
       msg.delete();
