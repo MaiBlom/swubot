@@ -77,40 +77,48 @@ bot.on('message', (msg) => {
   const msgChannel = msg.channel.id;
   let msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator');
   if(typeof msgMemberRole === 'undefined') msgMemberRole = msg.guild.roles.cache.find((role) => role.name === 'Dummy');
-  console.log(msg.guild.roles.cache.find((role) => role.name === 'Dummy'));
 
   try {
-    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!roleGen' && input.length > 1) {
-      msg.delete();
-      input.shift();
-      const role = input.join(' ');
-      generateRoleMessage(role, msgChannel);
-      return;
-    }
-    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!gameGen' && input.length === 1) {
-      msg.delete();
-      generateGameMessages(msgChannel);
-      return;
-    }
-    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!colourGen' && input.length === 1) {
-      msg.delete();
-      generateColourMessages(msgChannel);
-      return;
-    }
-    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!miscGen' && input.length === 1) {
-      msg.delete();
-      generateMiscMessages(msgChannel);
-    }
-    /*if (msgMemberRole.name.valueOf() === 'Moderator' && input[0] === '!msgDel' && input.length === 2) {
-      msg.delete();
-      input.shift();
-      let msgDelAmount = parseInt(input, 10);
-      for(msgDelAmount; msgDelAmount > 0; msgDelAmount--) {
-        let lm = msg.channel.lastMessage;
-        bot.channels.cache.get(msgChannel).send(msgDelAmount);
-        lm.delete();
+    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0].charAt(0) === '&') {
+      input[0].substring(1);
+      switch (input[0]) {
+        case 'roleGen':
+          if (input.length > 1) {
+            msg.delete();
+            input.shift();
+            const role = input.join(' ');
+            generateRoleMessage(role, msgChannel);
+          }
+          break;
+        case 'gameGen':
+          if (input.length === 1) {
+            msg.delete();
+            generateGameMessages(msgChannel);
+          }
+          break;
+        case 'colourGen':
+          if (input.length === 1) {
+            msg.delete();
+            generateColourMessages(msgChannel);
+          }
+          break;
+        case 'miscGen':
+          if (input.length === 1) {
+            msg.delete();
+            generateMiscMessages(msgChannel);
+          }
+          break;
+        case 'msgDel':
+          if (input.length === 2) {
+            msg.delete();
+            input.shift();
+            let msgDelAmount = parseInt(input, 10);
+            msg.channel.bulkDelete(msgDelAmount)
+              .catch(console.error);
+          }
+          break;
       }
-    }*/
+    }
   } catch (error) {
     console.log(error);
   }
