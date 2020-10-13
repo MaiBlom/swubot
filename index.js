@@ -82,6 +82,8 @@ bot.on('message', (msg) => {
     if (msgMemberRole.name.valueOf() === 'Moderator' && input[0].charAt(0) === '&') {
       input[0].substring(1);
       console.log(input[0]);
+      console.log(input[0].substring(1));
+      console.log(input[1]);
       switch (input[0]) {
         case 'roleGen':
           if (input.length > 1) {
