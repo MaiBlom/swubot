@@ -204,6 +204,7 @@ bot.on('raw', packet => {
   channel.messages.fetch(packet.d.message_id).then(message => {
     console.log(channel);
     console.log(packet);
+    console.log(message);
     // Emojis can have identifiers of name:id format, so we have to account for that case as well
     const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
     // This gives us the reaction we need to emit the event properly, in top of the message object
