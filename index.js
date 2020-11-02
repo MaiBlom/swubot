@@ -203,22 +203,26 @@ bot.on('raw', packet => {
   // Since we have confirmed the message is not cached, let's fetch it
   channel.messages.fetch(packet.d.message_id).then(message => {
     //console.log(channel);
-    console.log("PACKET: --------------------" + packet);
-    console.log("MESSAGE: -------------------" + message);
+    console.log("PACKET: --------------------");
+    console.log(packet);
+    console.log("MESSAGE: -------------------");
+    console.log(message);
     // Emojis can have identifiers of name:id format, so we have to account for that case as well
     const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
-    console.log("EMOJI: ----------------------"+ emoji)
+    console.log("EMOJI: ----------------------");
+    console.log(emoji);
     // This gives us the reaction we need to emit the event properly, in top of the message object
     const reaction = message.reactions.cache.get(emoji);
-    console.log("REACTION: -------------------" + reaction);
+    console.log("REACTION: -------------------");
+    console.log(reaction);
     // Adds the currently reacting user to the reaction's users collection.
-    if (reaction) reaction.users.set(packet.d.user_id, bot.users.get(packet.d.user_id));
+    if (reaction) reaction.users.set(packet.d.user_id, bot.users.cache.get(packet.d.user_id));
     // Check which type of event it is before emitting
     if (packet.t === 'MESSAGE_REACTION_ADD') {
-        bot.emit('messageReactionAdd', reaction, bot.users.get(packet.d.user_id));
+        bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
     }
     if (packet.t === 'MESSAGE_REACTION_REMOVE') {
-        bot.emit('messageReactionRemove', reaction, bot.users.get(packet.d.user_id));
+        bot.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
     }
   });
 })
