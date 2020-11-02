@@ -195,10 +195,10 @@ bot.on('message', (msg) => {
 });
 
 bot.on('raw', packet => {
-  console.log(packet);
   // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
   // We don't want this to run on unrelated packets
   if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
+  console.log(packet);
   // Grab the channel to check the message from
   const channel = client.channels.get(packet.d.channel_id);
   // There's no need to emit if the message is cached, because the event will fire anyway for that
