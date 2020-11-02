@@ -208,6 +208,16 @@ bot.on('raw', packet => {
     // Emojis can have identifiers of name:id format, so we have to account for that case as well
     const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
     console.log(emoji)
+
+    if (reaction.partial) {
+      try {
+        await reaction.fetch();
+      } catch (error) {
+        console.error(`Couldn't fetch the message: ${error}`);
+        return;
+      }
+    }
+    
     // This gives us the reaction we need to emit the event properly, in top of the message object
     const reaction = message.reactions.get(emoji);
     // Adds the currently reacting user to the reaction's users collection.
