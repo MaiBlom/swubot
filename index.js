@@ -201,7 +201,7 @@ bot.on('raw', packet => {
   // Grab the channel to check the message from
   const channel = bot.channels.cache.get(packet.d.channel_id);
   // Since we have confirmed the message is not cached, let's fetch it
-  channel.fetchMessage(packet.d.message_id).then(message => {
+  channel.messages.fetch(packet.d.message_id).then(message => {
     console.log(channel);
     console.log(packet);
     // Emojis can have identifiers of name:id format, so we have to account for that case as well
