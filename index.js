@@ -194,7 +194,7 @@ bot.on('message', (msg) => {
   }
 });
 
-bot.on('raw', async packet => {
+bot.on('raw', async (packet) => {
   // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
   // We don't want this to run on unrelated packets
   if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
