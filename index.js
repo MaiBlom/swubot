@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const bot = new Discord.Client({ 
   partials: ['MESSAGE', 'REACTION'],
-  ws: { intents: ["GUILDS", "GUILD_MESSAGES"] } 
+  	 }
 });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
@@ -55,9 +55,46 @@ function generateRoleMessage(role, channel) {
     });
 }
 
+function generateAmongUsVoteMessage(channel) {
+  bot.channels.cache
+    .get(channel)
+    .send(`\`\`\`python\n    | I live| 2 Impostors| 1 Impostor   |
+    +-------+-------------+-------------+
+    | 3     | DØD         | ALTID Stem  |
+    | 4     | DØD         | Ikk Stem    |
+    | 5     | ALTID Stem  | Stem        |
+    | 6     | ALTID Stem  | Stem        |
+    | 7     | Ikk Stem    | Situational |
+    | 8     | Situational | Situational |
+    | 9     | Situational | Situational |
+    | 10    | Situational | Situational |
+    +-------+-------------+-------------+\`\`\``);
+}
+
+function generateAmongUsSettingsMessage(channel) {
+  bot.channels.cache
+  .get(channel)
+  .send(`Impostors: 2
+  Confirm ejects: OFF
+  Emergency Meetings: 1
+  Emergency Cooldown: 20s
+  Discussion Time: 15s
+  Vote: 120s
+  Player Speed: 1.0x
+  Crewmate Vision: 0.5x
+  Impostor Vision: 1.5x
+  Kill Cooldown: 30s
+  Kill Distance: Short
+  Task Bar Updates: Meetings
+  Visual Tasks: Off
+  Common Tasks: 2
+  Long Tasks: 2
+  Short Tasks: 5`);
+}
+
 bot.on('ready', () => {
   console.log(`Connected as ${bot.user.id}`);
-
+ 
   bot.user.setActivity('4D Chess', { type: 'PLAYING' });
 
   bot.guilds.cache.forEach((guild) => {
@@ -111,6 +148,13 @@ bot.on('message', (msg) => {
             generateMiscMessages(msgChannel);
           }
           break;
+        case 'allGen':
+          if(input.length === 1) {
+            msg.delete();
+            generateGameMessages(msgChannel);
+            generateColourMessages(msgChannel);
+            generateMiscMessages(msgChannel);
+          }
         case 'msgDel':
           if (input.length === 2) {
             msg.delete();
@@ -120,18 +164,70 @@ bot.on('message', (msg) => {
               .catch(console.error);
           }
           break;
+        case 'amongus':
+          if (input.length === 2) {
+            msg.delete();
+            if (input[1] === 'vote') {
+              generateAmongUsVoteMessage(msgChannel);
+            } else if (input[1] === 'settings') {
+              generateAmongUsSettingsMessage(msgChannel);
+            }
+          }
+          break;
       }
+    } else if (input[0].charAt(0) === '&') {
+        input[0] = input[0].substring(1);
+        switch (input[0]) {
+          case 'amongus':
+            if (input.length === 2) {
+              msg.delete();
+              if (input[1] === 'vote') {
+                generateAmongUsVoteMessage(msgChannel);
+              } else if (input[1] === 'settings') {
+                generateAmongUsSettingsMessage(msgChannel);
+              }
+            }
+            break;
+        }
     }
   } catch (error) {
     console.log(error);
   }
 });
 
+/*bot.on('raw', packet => {
+  console.log(packet);
+  // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
+  // We don't want this to run on unrelated packets
+  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
+  // Grab the channel to check the message from
+  const channel = client.channels.get(packet.d.channel_id);
+  // There's no need to emit if the message is cached, because the event will fire anyway for that
+  if (channel.messages.has(packet.d.message_id)) return;
+  // Since we have confirmed the message is not cached, let's fetch it
+  channel.fetchMessage(packet.d.message_id).then(message => {
+      // Emojis can have identifiers of name:id format, so we have to account for that case as well
+      const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
+      // This gives us the reaction we need to emit the event properly, in top of the message object
+      const reaction = message.reactions.get(emoji);
+      // Adds the currently reacting user to the reaction's users collection.
+      if (reaction) reaction.users.set(packet.d.user_id, client.users.get(packet.d.user_id));
+      // Check which type of event it is before emitting
+      if (packet.t === 'MESSAGE_REACTION_ADD') {
+          client.emit('messageReactionAdd', reaction, client.users.get(packet.d.user_id));
+      }
+      if (packet.t === 'MESSAGE_REACTION_REMOVE') {
+          client.emit('messageReactionRemove', reaction, client.users.get(packet.d.user_id));
+      }
+  });
+}) */
+
 bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
   if (reaction.message.channel.id != 755502310355894432) return;
+  console.log(reaction.message);
   const member = reaction.message.guild.members.cache.get(user.id);
-  const { guild } = reaction.message;
+  const { guild } = reaction.message; 
 
   if (reaction.partial) {
     try {
@@ -157,7 +253,8 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 
 bot.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return;
-  if (reaction.message.channel.id !== 755502310355894432) return;
+  if (reaction.message.channel.id != 755502310355894432) return;
+  console.log(reaction.message);
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message;
 
@@ -168,7 +265,7 @@ bot.on('messageReactionRemove', async (reaction, user) => {
       console.log("Couldn't fetch the message: ", error);
       return;
     }
-  } 
+  }
 
   const reactedMessage = reaction.message.content.split('``');
   const roleToBeRemoved = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
@@ -182,32 +279,5 @@ bot.on('messageReactionRemove', async (reaction, user) => {
     member.roles.remove(roleToBeRemoved);
   }
 });
-
-bot.on('raw', packet => {
-  console.log(packet);
-  // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
-  // We don't want this to run on unrelated packets
-  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
-  // Grab the channel to check the message from
-  const channel = client.channels.get(packet.d.channel_id);
-  // There's no need to emit if the message is cached, because the event will fire anyway for that
-  if (channel.messages.has(packet.d.message_id)) return;
-  // Since we have confirmed the message is not cached, let's fetch it
-  channel.fetchMessage(packet.d.message_id).then(message => {
-      // Emojis can have identifiers of name:id format, so we have to account for that case as well
-      const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
-      // This gives us the reaction we need to emit the event properly, in top of the message object
-      const reaction = message.reactions.get(emoji);
-      // Adds the currently reacting user to the reaction's users collection.
-      if (reaction) reaction.users.set(packet.d.user_id, client.users.get(packet.d.user_id));
-      // Check which type of event it is before emitting
-      if (packet.t === 'MESSAGE_REACTION_ADD') {
-          client.emit('messageReactionAdd', reaction, client.users.get(packet.d.user_id));
-      }
-      if (packet.t === 'MESSAGE_REACTION_REMOVE') {
-          client.emit('messageReactionRemove', reaction, client.users.get(packet.d.user_id));
-      }
-  });
-})
 
 bot.login(process.env.BOTTOKEN);
