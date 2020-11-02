@@ -1,7 +1,10 @@
 const Discord = require('discord.js');
 require('dotenv').config();
 
-const bot = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] });
+const bot = new Discord.Client({ 
+  partials: ['MESSAGE', 'REACTION'],
+  ws: { intents: ["GUILDS", "GUILD_MESSAGES"] } 
+});
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
 function generateGameMessages(channel) {
