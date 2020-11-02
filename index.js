@@ -216,7 +216,9 @@ bot.on('raw', packet => {
     console.log("REACTION: -------------------");
     console.log(reaction);
     // Adds the currently reacting user to the reaction's users collection.
-    if (reaction) reaction.users.set(packet.d.user_id, bot.users.cache.get(packet.d.user_id));
+    if (reaction) reaction.users.cache.set(packet.d.user_id, bot.users.cache.get(packet.d.user_id));
+    console.log("REACTION USER ID: --------------------");
+    console.log(bot.users.cache.get(packet.d.user_id));
     // Check which type of event it is before emitting
     if (packet.t === 'MESSAGE_REACTION_ADD') {
         bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
@@ -224,8 +226,8 @@ bot.on('raw', packet => {
     if (packet.t === 'MESSAGE_REACTION_REMOVE') {
         bot.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
     }
-  });
-})
+  }); // 743270304880787488 PACKET USER ID
+}) // 722779876578295808 BOT USER ID
 
 bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
