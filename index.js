@@ -199,9 +199,8 @@ bot.on('raw', packet => {
   // We don't want this to run on unrelated packets
   if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
   // Grab the channel to check the message from
-  const channel = bot.channels.get(packet.d.channel_id);
+  const channel = bot.channels.cache.get(packet.d.channel_id);
   // Since we have confirmed the message is not cached, let's fetch it
-
   console.log(packet + channel);
   channel.fetchMessage(packet.d.message_id).then(message => {
     // Emojis can have identifiers of name:id format, so we have to account for that case as well
