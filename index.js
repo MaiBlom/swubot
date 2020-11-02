@@ -115,7 +115,6 @@ bot.on('message', (msg) => {
   let input = msg.content.split(' ');
   const msgChannel = msg.channel.id;
   let msgMemberRole = msg.member.roles.cache.find((role) => role.name === 'Moderator');
-  console.log(msgMemberRole);
   if(typeof msgMemberRole === 'undefined') msgMemberRole = msg.guild.roles.cache.find((role) => role.name === 'Dummy');
 
   try {
