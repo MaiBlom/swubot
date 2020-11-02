@@ -165,7 +165,7 @@ bot.on('messageReactionRemove', async (reaction, user) => {
       console.log("Couldn't fetch the message: ", error);
       return;
     }
-  }
+  } 
 
   const reactedMessage = reaction.message.content.split('``');
   const roleToBeRemoved = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
