@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 
 const bot = new Discord.Client({ 
-  partials: ['MESSAGE', 'REACTION']
+  partials: ['MESSAGE', 'CHANNEL','REACTION']
 });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
@@ -221,10 +221,10 @@ bot.on('raw', packet => {
     //console.log(bot.users.cache.get(packet.d.user_id));
     // Check which type of event it is before emitting
     if (packet.t === 'MESSAGE_REACTION_ADD') {
-        bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
+        Client.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
     }
     if (packet.t === 'MESSAGE_REACTION_REMOVE') {
-        bot.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
+        Client.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
     }
   }); // 743270304880787488 PACKET USER ID
 }) // 722779876578295808 BOT USER ID
