@@ -2,8 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 
 const bot = new Discord.Client({ 
-  partials: ['MESSAGE', 'REACTION'],
-  	 }
+  partials: ['MESSAGE', 'REACTION']
 });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
