@@ -203,14 +203,14 @@ bot.on('raw', packet => {
   // Since we have confirmed the message is not cached, let's fetch it
   channel.messages.fetch(packet.d.message_id).then(message => {
     //console.log(channel);
-    console.log(packet);
-    console.log(message);
+    console.log("PACKET: --------------------" + packet);
+    console.log("MESSAGE: -------------------" + message);
     // Emojis can have identifiers of name:id format, so we have to account for that case as well
     const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
-    console.log(emoji)
-    
+    console.log("EMOJI: ----------------------"+ emoji)
     // This gives us the reaction we need to emit the event properly, in top of the message object
-    //const reaction = message.
+    const reaction = message.reactions.cache.get(emoji);
+    console.log("REACTION: -------------------" + reaction);
     // Adds the currently reacting user to the reaction's users collection.
     if (reaction) reaction.users.set(packet.d.user_id, bot.users.get(packet.d.user_id));
     // Check which type of event it is before emitting
