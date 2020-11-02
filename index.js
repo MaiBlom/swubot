@@ -198,11 +198,10 @@ bot.on('raw', packet => {
   // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
   // We don't want this to run on unrelated packets
   if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
-  // Grab the channel to check the message from
-  console.log(packet);
-  const channel = client.channels.get(packet.d.channel_id);
   // Since we have confirmed the message is not cached, let's fetch it
   channel.fetchMessage(packet.d.message_id).then(message => {
+      console.log(packet);
+
       // Emojis can have identifiers of name:id format, so we have to account for that case as well
       const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
       // This gives us the reaction we need to emit the event properly, in top of the message object
