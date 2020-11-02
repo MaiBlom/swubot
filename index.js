@@ -200,8 +200,6 @@ bot.on('raw', packet => {
   if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
   // Grab the channel to check the message from
   const channel = client.channels.get(packet.d.channel_id);
-  // There's no need to emit if the message is cached, because the event will fire anyway for that
-  if (channel.messages.has(packet.d.message_id)) return;
   console.log(packet);
   // Since we have confirmed the message is not cached, let's fetch it
   channel.fetchMessage(packet.d.message_id).then(message => {
