@@ -6,6 +6,8 @@ const bot = new Discord.Client({
 });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
+bot.login(process.env.BOTTOKEN);
+
 function generateGameMessages(channel) {
   bot.channels.cache.get(channel).send(`**Game roles:**`);
   gRoles.forEach((role) => {
@@ -221,7 +223,8 @@ bot.on('raw', packet => {
     //console.log(bot.users.cache.get(packet.d.user_id));
     // Check which type of event it is before emitting
     if (packet.t === 'MESSAGE_REACTION_ADD') {
-        Client.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
+        bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
+        bot.
     }
     if (packet.t === 'MESSAGE_REACTION_REMOVE') {
         Client.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
@@ -284,5 +287,3 @@ bot.on('messageReactionRemove', async (reaction, user) => {
     member.roles.remove(roleToBeRemoved);
   }
 });
-
-bot.login(process.env.BOTTOKEN);
