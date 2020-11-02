@@ -222,11 +222,15 @@ bot.on('raw', packet => {
     //console.log("REACTION USER ID: --------------------");
     //console.log(bot.users.cache.get(packet.d.user_id));
     // Check which type of event it is before emitting
-    if (packet.t === 'MESSAGE_REACTION_ADD') {
-        bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
-    }
-    if (packet.t === 'MESSAGE_REACTION_REMOVE') {
-        Client.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
+    try {
+      if (packet.t === 'MESSAGE_REACTION_ADD') {
+          bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
+      }
+      if (packet.t === 'MESSAGE_REACTION_REMOVE') {
+          Client.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
+      }
+    } catch (error) {
+      console.error(error);
     }
   }); // 743270304880787488 PACKET USER ID
 }) // 722779876578295808 BOT USER ID
