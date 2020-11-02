@@ -194,7 +194,7 @@ bot.on('message', (msg) => {
   }
 });
 
-bot.on('raw', async (packet) => {
+bot.on('raw', packet => {
   // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
   // We don't want this to run on unrelated packets
   if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
@@ -208,15 +208,6 @@ bot.on('raw', async (packet) => {
     // Emojis can have identifiers of name:id format, so we have to account for that case as well
     const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
     console.log(emoji)
-
-    if (reaction.partial) {
-      try {
-        await reaction.fetch();
-      } catch (error) {
-        console.error(`Couldn't fetch the message: ${error}`);
-        return;
-      }
-    }
     
     // This gives us the reaction we need to emit the event properly, in top of the message object
     const reaction = message.reactions.get(emoji);
