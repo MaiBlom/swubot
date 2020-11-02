@@ -224,7 +224,6 @@ bot.on('raw', packet => {
     // Check which type of event it is before emitting
     if (packet.t === 'MESSAGE_REACTION_ADD') {
         bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
-        bot.
     }
     if (packet.t === 'MESSAGE_REACTION_REMOVE') {
         Client.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
