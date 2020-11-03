@@ -3,7 +3,7 @@ require('dotenv').config();
 
   const bot = new Discord.Client({ 
     partials: ['MESSAGE', 'CHANNEL','REACTION'],
-    ws: { intents: ["GUILD_PRESENCES"] }
+    ws: { intents: ["GUILDS", "GUILD_PRESENCES"] }
   });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
@@ -97,7 +97,7 @@ bot.on('ready', () => {
  
   bot.user.setActivity('4D Chess', { type: 'PLAYING' });
 
-  /*bot.guilds.cache.forEach((guild) => {
+  bot.guilds.cache.forEach((guild) => {
     console.log(guild.name);
 
     bot.channels.cache.forEach((channel) => {
@@ -108,7 +108,7 @@ bot.on('ready', () => {
     guild.roles.cache.forEach((roles) => {
       console.log(` - ${roles.name} ${roles.id}`);
     });
-  });*/
+  });
 });
 
 bot.on('message', (msg) => {
