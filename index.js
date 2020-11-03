@@ -227,7 +227,6 @@ bot.on('raw', packet => {
 })*/
 
 bot.on('messageReactionAdd', async (reaction, user) => {
-  console.log(reaction);
   if (user.bot) return;
   if (reaction.message.channel.id != 755502310355894432) return;
   const member = reaction.message.guild.members.cache.get(user.id);
@@ -256,7 +255,6 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 });
 
 bot.on('messageReactionRemove', async (reaction, user) => {
-  console.log(reaction);
   if (user.bot) return;
   if (reaction.message.channel.id != 755502310355894432) return;
   const member = reaction.message.guild.members.cache.get(user.id);
