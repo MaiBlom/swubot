@@ -2,7 +2,8 @@ const Discord = require('discord.js');
 require('dotenv').config();
 
   const bot = new Discord.Client({ 
-    partials: ['MESSAGE', 'CHANNEL','REACTION']
+    partials: ['MESSAGE', 'CHANNEL','REACTION'],
+    ws: { intents: ["GUILD_PRESENCES"] }
   });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
@@ -195,7 +196,7 @@ bot.on('message', (msg) => {
     console.log(error);
   }
 });
-
+/*
 bot.on('raw', packet => {
   // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
   // We don't want this to run on unrelated packets
@@ -225,7 +226,7 @@ bot.on('raw', packet => {
         bot.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
     }
   });
-})
+})*/
 
 bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
