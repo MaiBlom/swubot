@@ -112,7 +112,6 @@ bot.on('ready', () => {
 });
 
 bot.on('message', (msg) => {
-  console.log(msg);
   if (msg.member.user.bot) return;
   let input = msg.content.split(' ');
   const msgChannel = msg.channel.id;
