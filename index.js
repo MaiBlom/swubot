@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 require('dotenv').config();
 
-const bot = new Discord.Client({ 
-  partials: ['MESSAGE', 'CHANNEL','REACTION', 'EVENT']
-});
+  const bot = new Discord.Client({ 
+    partials: ['MESSAGE', 'CHANNEL','REACTION']
+  });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
 bot.login(process.env.BOTTOKEN);
@@ -217,23 +217,15 @@ bot.on('raw', packet => {
     const reaction = message.reactions.cache.get(emoji);
     console.log("REACTION: -------------------");
     console.log(reaction);
-    // Adds the currently reacting user to the reaction's users collection.
-    //if (reaction) reaction.users.cache.set(packet.d.user_id, bot.users.cache.get(packet.d.user_id));
-    //console.log("REACTION USER ID: --------------------");
-    //console.log(bot.users.cache.get(packet.d.user_id));
     // Check which type of event it is before emitting
-    try {
-      if (packet.t === 'MESSAGE_REACTION_ADD') {
-          bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
-      }
-      if (packet.t === 'MESSAGE_REACTION_REMOVE') {
-          Client.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
-      }
-    } catch (error) {
-      console.error(error);
+    if (packet.t === 'MESSAGE_REACTION_ADD') {
+        bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
     }
-  }); // 743270304880787488 PACKET USER ID
-}) // 722779876578295808 BOT USER ID
+    if (packet.t === 'MESSAGE_REACTION_REMOVE') {
+        bot.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
+    }
+  });
+})
 
 bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
