@@ -3,7 +3,7 @@ require('dotenv').config();
 
   const bot = new Discord.Client({ 
     partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
-    ws: { intents: ['GUILDS', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES'] }
+    ws: { intents: ['GUILDS', 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_REACTIONS'] }
   });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
