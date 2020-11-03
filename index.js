@@ -14,7 +14,7 @@ function generateGameMessages(channel) {
       .get(channel)
       .send(`React below to get the \`\`${role}\`\` role!`)
       .then((s) => {
-        s.react('✔');
+        s.react('✔'); 
       });
   });
   bot.channels.cache.get(channel).send(`\u200B`);
