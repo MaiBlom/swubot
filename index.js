@@ -194,7 +194,7 @@ bot.on('message', (msg) => {
     console.log(error);
   }
 });
-
+/*
 bot.on('raw', packet => {
   // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
   // We don't want this to run on unrelated packets
@@ -224,7 +224,7 @@ bot.on('raw', packet => {
         bot.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
     }
   });
-})
+})*/
 
 bot.on('messageReactionAdd', async (reaction, user) => {
   console.log(reaction);
