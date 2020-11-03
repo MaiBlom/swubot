@@ -7,8 +7,6 @@ require('dotenv').config();
   });
 const { gRoles, mRoles, cRoles } = require('./roles.js');
 
-bot.login(process.env.BOTTOKEN);
-
 function generateGameMessages(channel) {
   bot.channels.cache.get(channel).send(`**Game roles:**`);
   gRoles.forEach((role) => {
@@ -283,3 +281,5 @@ bot.on('messageReactionRemove', async (reaction, user) => {
     member.roles.remove(roleToBeRemoved);
   }
 });
+
+bot.login(process.env.BOTTOKEN);
