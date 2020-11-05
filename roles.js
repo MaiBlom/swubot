@@ -1,41 +1,24 @@
 const gRoles = [
   'Among Us',
-  'Anno',
-  'Arma',
-  'Brawlhalla',
   'Brætspil',
   'Civilization',
   'CSGO',
-  'Deceit',
   'Dungeons & Dragons',
-  'For Honor',
-  'GTA',
-  'Hearthstone',
   'Jackbox',
   'League of Legends',
   'Minecraft',
-  'Monster Hunter World',
-  'Mount & Blade',
   'Overwatch',
   'Phasmophobia',
   'Pummel Party',
   'Rainbow Six Siege',
   'Rocket League',
-  'Rimworld',
-  'Screeps',
-  'Stellaris',
   'Switch',
-  'SCP',
   'Skribbl.io',
-  'TF2',
   'TFT',
-  'Tarkov',
-  'Total War',
   'Valorant',
   'World of Warcraft',
-  'Warzone'
 ];
-const mRoles = ['Artist', 'Boomer', 'DJ', 'Hardcore Fupmager'];
+const mRoles = ['Artist', 'Boomer', 'DJ'];
 const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink', 'Lime Green'];
 
 module.exports = { gRoles, mRoles, cRoles };
