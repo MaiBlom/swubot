@@ -9,6 +9,7 @@ const gRoles = [
   'Minecraft',
   'Overwatch',
   'Phasmophobia',
+  'Project Winter',
   'Pummel Party',
   'Rainbow Six Siege',
   'Rocket League',
