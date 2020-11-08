@@ -73,23 +73,29 @@ function generateAmongUsVoteMessage(channel) {
 
 function generateAmongUsSettingsMessage(channel) {
   bot.channels.cache
-  .get(channel)
-  .send(`Impostors: 2
-  Confirm ejects: OFF
-  Emergency Meetings: 1
-  Emergency Cooldown: 20s
-  Discussion Time: 15s
-  Vote: 120s
-  Player Speed: 1.0x
-  Crewmate Vision: 0.5x
-  Impostor Vision: 1.5x
-  Kill Cooldown: 30s
-  Kill Distance: Short
-  Task Bar Updates: Meetings
-  Visual Tasks: Off
-  Common Tasks: 2
-  Long Tasks: 2
-  Short Tasks: 5`);
+    .get(channel)
+    .send(`Impostors: 2
+    Confirm ejects: OFF
+    Emergency Meetings: 1
+    Emergency Cooldown: 20s
+    Discussion Time: 15s
+    Vote: 120s
+    Player Speed: 1.0x
+    Crewmate Vision: 0.5x
+    Impostor Vision: 1.5x
+    Kill Cooldown: 30s
+    Kill Distance: Short
+    Task Bar Updates: Meetings
+    Visual Tasks: Off
+    Common Tasks: 2
+    Long Tasks: 2
+    Short Tasks: 5`);
+}
+
+function generateInviteLinkMessage(channel) {
+  bot.channels.cache
+    .get(channel)
+    .send(`https://discord.gg/tcynfwG`);
 }
 
 bot.on('ready', () => {
@@ -174,6 +180,11 @@ bot.on('message', (msg) => {
             }
           }
           break;
+        case 'invite':
+          if (input.length === 1) {
+            msg.delete();
+            generateInviteLinkMessage(msgChannel);
+          }
       }
     } else if (input[0].charAt(0) === '&') {
         input[0] = input[0].substring(1);
