@@ -236,7 +236,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
       `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBe.name}  `
     );
     member.roles.add(roleToBe);
-  
+  }
 });
 
 bot.on('messageReactionRemove', async (reaction, user) => {
