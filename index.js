@@ -205,37 +205,6 @@ bot.on('message', (msg) => {
     console.log(error);
   }
 });
-/*
-bot.on('raw', packet => {
-  // Code taken from: https://github.com/AnIdiotsGuide/discordjs-bot-guide/blob/master/coding-guides/raw-events.md
-  // We don't want this to run on unrelated packets
-  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
-  // Grab the channel to check the message from
-  const channel = bot.channels.cache.get(packet.d.channel_id);
-  // Since we have confirmed the message is not cached, let's fetch it
-  channel.messages.fetch(packet.d.message_id).then(message => {
-    //console.log(channel);
-    console.log("PACKET: --------------------");
-    console.log(packet);
-    console.log("MESSAGE: -------------------");
-    console.log(message);
-    // Emojis can have identifiers of name:id format, so we have to account for that case as well
-    const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
-    console.log("EMOJI: ----------------------");
-    console.log(emoji);
-    // This gives us the reaction we need to emit the event properly, in top of the message object
-    const reaction = message.reactions.cache.get(emoji);
-    console.log("REACTION: -------------------");
-    console.log(reaction);
-    // Check which type of event it is before emitting
-    if (packet.t === 'MESSAGE_REACTION_ADD') {
-        bot.emit('messageReactionAdd', reaction, bot.users.cache.get(packet.d.user_id));
-    }
-    if (packet.t === 'MESSAGE_REACTION_REMOVE') {
-        bot.emit('messageReactionRemove', reaction, bot.users.cache.get(packet.d.user_id));
-    }
-  });
-})*/
 
 bot.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return;
@@ -253,19 +222,26 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   }
 
   const reactedMessage = reaction.message.content.split('``');
-  const roleToBeAdded = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
+  const roleToBe = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
 
-  if (!roleToBeAdded) {
+  if (!roleToBe) {
     console.log('No role supplied');
-  } else {
+  } else if (reaction.emoji == '✔') {
     console.log(
-      `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBeAdded.name}  `
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBe.name}  `
     );
-    member.roles.add(roleToBeAdded);
+    member.roles.add(roleToBe);
+    reaction.delete();
+  } else if (reaction.emoji == '❌') {
+    console.log(
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${reaction.emoji} & removed the role ${roleToBe.name}`
+    );
+    member.roles.remove(roleToBe);
+    reaction.delete();
   }
 });
 
-bot.on('messageReactionRemove', async (reaction, user) => {
+/*bot.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return;
   if (reaction.message.channel.id != 755502310355894432) return;
   const member = reaction.message.guild.members.cache.get(user.id);
@@ -291,6 +267,6 @@ bot.on('messageReactionRemove', async (reaction, user) => {
     );
     member.roles.remove(roleToBeRemoved);
   }
-});
+});*/
 
 bot.login(process.env.BOTTOKEN);
