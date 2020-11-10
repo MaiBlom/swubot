@@ -15,7 +15,7 @@ function generateGameMessages(channel) {
       .send(`React below to get the \`\`${role}\`\` role!`)
       .then((s) => {
         s.react('✔');
-        s.react('❌');
+        //s.react('❌');
       });
   });
   bot.channels.cache.get(channel).send(`\u200B`);
@@ -29,7 +29,7 @@ function generateColourMessages(channel) {
       .send(`React below to get the \`\`${role}\`\` role!`)
       .then((s) => {
         s.react('✔');
-        s.react('❌');
+        //s.react('❌');
       });
   });
   bot.channels.cache.get(channel).send(`\u200B`);
@@ -43,7 +43,7 @@ function generateMiscMessages(channel) {
       .send(`React below to get the \`\`${role}\`\` role!`)
       .then((s) => {
         s.react('✔');
-        s.react('❌');
+        //s.react('❌');
       });
   });
   bot.channels.cache.get(channel).send(`\u200B`);
@@ -55,7 +55,7 @@ function generateRoleMessage(role, channel) {
     .send(`React below to get the \`\`${role}\`\` role!`)
     .then((s) => {
       s.react('✔');
-      s.react('❌');
+      //s.react('❌');
     });
 }
 
