@@ -227,7 +227,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 
   const reactedMessage = reaction.message.content.split('``');
   const roleToBe = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
-  const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
+  const userReactions = reaction.message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
 
   if (!roleToBe) {
     console.log('No role supplied');
