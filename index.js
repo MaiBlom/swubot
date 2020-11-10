@@ -237,13 +237,15 @@ bot.on('messageReactionAdd', async (reaction, user) => {
       `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBe.name}  `
     );
     member.roles.add(roleToBe);
-    reaction.message.reactions.cache.remove();
+    reaction.message.channel.fetchMessage(reaction.message.id).map(r => r).then(message => {
+      message.reactions.cache.forEach(reaction => reaction.remove(member))
+    })
   } else if (reaction.emoji.name === '❌') {
     console.log(
       `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Added ${reaction.emoji} & removed the role ${roleToBe.name}`
     );
     member.roles.remove(roleToBe);
-    reaction.message.reactions.cache.remove();
+    
   }
 });
 
