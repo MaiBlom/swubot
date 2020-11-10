@@ -231,25 +231,15 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 
   if (!roleToBe) {
     console.log('No role supplied');
-    return;
-  }
-  if (reaction.emoji.name === '✔') {
+  } else {
     console.log(
       `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBe.name}  `
     );
     member.roles.add(roleToBe);
-    console.log(reaction);
-    reaction.users.resolve(reaction).remove();
-  } else if (reaction.emoji.name === '❌') {
-    console.log(
-      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Added ${reaction.emoji} & removed the role ${roleToBe.name}`
-    );
-    member.roles.remove(roleToBe);
-    
-  }
+  
 });
 
-/*bot.on('messageReactionRemove', async (reaction, user) => {
+bot.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return;
   if (reaction.message.channel.id != 755502310355894432) return;
   const member = reaction.message.guild.members.cache.get(user.id);
@@ -275,6 +265,6 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     );
     member.roles.remove(roleToBeRemoved);
   }
-});*/
+});
 
 bot.login(process.env.BOTTOKEN);
