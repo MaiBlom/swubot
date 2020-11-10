@@ -240,7 +240,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     member.roles.add(roleToBe);
     try {
       for (const reaction of userReactions.values()) {
-        await reaction.users.remove(member);
+        await reaction.users.cache.remove(member);
       }
     } catch (error) {
       console.error('Failed to remove reactions.');
@@ -252,7 +252,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     member.roles.remove(roleToBe);
     try {
       for (const reaction of userReactions.values()) {
-        await reaction.users.remove(member);
+        await reaction.users.cache.remove(member);
       }
     } catch (error) {
       console.error('Failed to remove reactions.');
