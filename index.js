@@ -230,7 +230,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 
   if (!roleToBe) {
     console.log('No role supplied');
-    break;
+    return;
   }
   if (reaction.emoji === '✔') {
     console.log(
