@@ -234,7 +234,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     reaction.delete();
   } else if (reaction.emoji == '❌') {
     console.log(
-      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Removed ${reaction.emoji} & removed the role ${roleToBe.name}`
+      `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Added ${reaction.emoji} & removed the role ${roleToBe.name}`
     );
     member.roles.remove(roleToBe);
     reaction.delete();
