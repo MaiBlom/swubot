@@ -232,6 +232,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     console.log('No role supplied');
     return;
   }
+  console.log(reaction.emoji)
   if (reaction.emoji === '✔') {
     console.log(
       `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBe.name}  `
