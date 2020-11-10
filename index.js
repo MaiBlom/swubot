@@ -227,7 +227,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 
   const reactedMessage = reaction.message.content.split('``');
   const roleToBe = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
-  const userReactions = reaction.message.reactions.cache.filter(reaction => reaction.users.cache.has(userId));
+  const userReactions = reaction.message.reactions.cache.filter(reaction => reaction.users.cache.has(member));
 
   if (!roleToBe) {
     console.log('No role supplied');
@@ -240,7 +240,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     member.roles.add(roleToBe);
     try {
       for (const reaction of userReactions.values()) {
-        await reaction.users.remove(userId);
+        await reaction.users.remove(member);
       }
     } catch (error) {
       console.error('Failed to remove reactions.');
@@ -252,7 +252,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     member.roles.remove(roleToBe);
     try {
       for (const reaction of userReactions.values()) {
-        await reaction.users.remove(userId);
+        await reaction.users.remove(member);
       }
     } catch (error) {
       console.error('Failed to remove reactions.');
