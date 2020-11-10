@@ -228,6 +228,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   const reactedMessage = reaction.message.content.split('``');
   const roleToBe = guild.roles.cache.find((role) => role.name === reactedMessage[1].trim());
 
+
   if (!roleToBe) {
     console.log('No role supplied');
     return;
@@ -238,6 +239,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     );
     member.roles.add(roleToBe);
     console.log(reaction);
+    reaction.users.resolve(reaction).remove();
   } else if (reaction.emoji.name === '❌') {
     console.log(
       `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Added ${reaction.emoji} & removed the role ${roleToBe.name}`
