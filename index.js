@@ -232,13 +232,13 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     console.log('No role supplied');
     break;
   }
-  if (reaction.emoji == '✔') {
+  if (reaction.emoji === '✔') {
     console.log(
       `${reaction.message.author.tag}'s message "${reaction.message.content}" gained a reaction by ${user.tag}! Added ${reaction.emoji} & added the role ${roleToBe.name}  `
     );
     member.roles.add(roleToBe);
     reaction.delete();
-  } else if (reaction.emoji == '❌') {
+  } else if (reaction.emoji === '❌') {
     console.log(
       `${reaction.message.author.tag}'s message "${reaction.message.content}" lost a reaction by ${user.tag}! Added ${reaction.emoji} & removed the role ${roleToBe.name}`
     );
