@@ -1,106 +1,11 @@
 const Discord = require('discord.js');
 require('dotenv').config();
 
-  const bot = new Discord.Client({ 
-    partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
-    ws: { intents: ['GUILDS', 'GUILD_PRESENCES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'] }
-  });
+const bot = new Discord.Client({ 
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+  ws: { intents: ['GUILDS', 'GUILD_PRESENCES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'] }
+});
 const { gRoles, mRoles, cRoles } = require('./roles.js');
-
-function generateGameMessages(channel) {
-  bot.channels.cache.get(channel).send(`**Game roles:**`);
-  gRoles.forEach((role) => {
-    bot.channels.cache
-      .get(channel)
-      .send(`React below to get the \`\`${role}\`\` role!`)
-      .then((s) => {
-        s.react('✔');
-        //s.react('❌');
-      });
-  });
-  bot.channels.cache.get(channel).send(`\u200B`);
-}
-
-function generateColourMessages(channel) {
-  bot.channels.cache.get(channel).send(`**Colour roles:**`);
-  cRoles.forEach((role) => {
-    bot.channels.cache
-      .get(channel)
-      .send(`React below to get the \`\`${role}\`\` role!`)
-      .then((s) => {
-        s.react('✔');
-        //s.react('❌');
-      });
-  });
-  bot.channels.cache.get(channel).send(`\u200B`);
-}
-
-function generateMiscMessages(channel) {
-  bot.channels.cache.get(channel).send(`**Misc. roles:**`);
-  mRoles.forEach((role) => {
-    bot.channels.cache
-      .get(channel)
-      .send(`React below to get the \`\`${role}\`\` role!`)
-      .then((s) => {
-        s.react('✔');
-        //s.react('❌');
-      });
-  });
-  bot.channels.cache.get(channel).send(`\u200B`);
-}
-
-function generateRoleMessage(role, channel) {
-  bot.channels.cache
-    .get(channel)
-    .send(`React below to get the \`\`${role}\`\` role!`)
-    .then((s) => {
-      s.react('✔');
-      //s.react('❌');
-    });
-}
-
-function generateAmongUsVoteMessage(channel) {
-  bot.channels.cache
-    .get(channel)
-    .send(`\`\`\`python\n    | I live| 2 Impostors| 1 Impostor   |
-    +-------+-------------+-------------+
-    | 3     | DØD         | ALTID Stem  |
-    | 4     | DØD         | Ikk Stem    |
-    | 5     | ALTID Stem  | Stem        |
-    | 6     | ALTID Stem  | Stem        |
-    | 7     | Ikk Stem    | Situational |
-    | 8     | Situational | Situational |
-    | 9     | Situational | Situational |
-    | 10    | Situational | Situational |
-    +-------+-------------+-------------+\`\`\``);
-}
-
-function generateAmongUsSettingsMessage(channel) {
-  bot.channels.cache
-    .get(channel)
-    .send(`Impostors: 2
-    Confirm ejects: OFF
-    Emergency Meetings: 1
-    Emergency Cooldown: 20s
-    Discussion Time: 15s
-    Vote: 120s
-    Player Speed: 1.0x
-    Crewmate Vision: 0.5x
-    Impostor Vision: 1.5x
-    Kill Cooldown: 30s
-    Kill Distance: Short
-    Task Bar Updates: Meetings
-    Visual Tasks: Off
-    Common Tasks: 2
-    Long Tasks: 2
-    Short Tasks: 5`);
-}
-
-function generateInviteLinkMessage(channel) {
-  bot.channels.cache
-    .get(channel)
-    .send(`https://discord.gg/tcynfwG`);
-}
 
 bot.on('ready', () => {
   console.log(`Connected as ${bot.user.id}`);
@@ -137,35 +42,35 @@ bot.on('message', (msg) => {
             msg.delete();
             input.shift();
             const role = input.join(' ');
-            generateRoleMessage(role, msgChannel);
+            functions.generateRoleMessage(role, msgChannel);
           }
           break;
         case 'gameGen':
           if (input.length === 1) {
             msg.delete();
-            generateGameMessages(msgChannel);
+            functions.generateGameMessages(msgChannel);
           }
           break;
         case 'colourGen':
           if (input.length === 1) {
             msg.delete();
-            generateColourMessages(msgChannel);
+            functions.generateColourMessages(msgChannel);
           }
           break;
         case 'miscGen':
           if (input.length === 1) {
             msg.delete();
-            generateMiscMessages(msgChannel);
+            functions.generateMiscMessages(msgChannel);
           }
           break;
         case 'allGen':
           if(input.length === 1) {
             msg.delete();
-            generateGameMessages(msgChannel);
-            generateColourMessages(msgChannel);
-            generateMiscMessages(msgChannel);
+            functions.generateGameMessages(msgChannel);
+            functions.generateColourMessages(msgChannel);
+            functions.generateMiscMessages(msgChannel);
           }
-        case 'msgDel':
+        case 'delMsg':
           if (input.length === 2) {
             msg.delete();
             input.shift();
@@ -178,17 +83,24 @@ bot.on('message', (msg) => {
           if (input.length === 2) {
             msg.delete();
             if (input[1] === 'vote') {
-              generateAmongUsVoteMessage(msgChannel);
+              functions.generateAmongUsVoteMessage(msgChannel);
             } else if (input[1] === 'settings') {
-              generateAmongUsSettingsMessage(msgChannel);
+              functions.generateAmongUsSettingsMessage(msgChannel);
             }
           }
           break;
         case 'invite':
           if (input.length === 1) {
             msg.delete();
-            generateInviteLinkMessage(msgChannel);
+            functions.generateInviteLinkMessage(msgChannel);
           }
+          break;
+        case 'help':
+          if (input.length === 1) {
+            msg.delete();
+            functions.generateModHelpMessage(msgChannel);
+          }
+          break;
       }
     } else if (input[0].charAt(0) === '&') {
         input[0] = input[0].substring(1);
@@ -197,10 +109,16 @@ bot.on('message', (msg) => {
             if (input.length === 2) {
               msg.delete();
               if (input[1] === 'vote') {
-                generateAmongUsVoteMessage(msgChannel);
+                functions.generateAmongUsVoteMessage(msgChannel);
               } else if (input[1] === 'settings') {
-                generateAmongUsSettingsMessage(msgChannel);
+                functions.generateAmongUsSettingsMessage(msgChannel);
               }
+            }
+            break;
+          case 'help':
+            if (input.length === 1) {
+              msg.delete();
+              functions.generateHelpMessage(msgChannel);
             }
             break;
         }
