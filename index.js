@@ -43,33 +43,33 @@ bot.on('message', (msg) => {
             msg.delete();
             input.shift();
             const role = input.join(' ');
-            functions.generateRoleMessage(role, msgChannel);
+            functions.generateRoleMessage(bot, role, msgChannel);
           }
           break;
         case 'gameGen':
           if (input.length === 1) {
             msg.delete();
-            functions.generateGameMessages(msgChannel);
+            functions.generateGameMessages(bot, msgChannel);
           }
           break;
         case 'colourGen':
           if (input.length === 1) {
             msg.delete();
-            functions.generateColourMessages(msgChannel);
+            functions.generateColourMessages(bot, msgChannel);
           }
           break;
         case 'miscGen':
           if (input.length === 1) {
             msg.delete();
-            functions.generateMiscMessages(msgChannel);
+            functions.generateMiscMessages(bot, msgChannel);
           }
           break;
         case 'allGen':
           if(input.length === 1) {
             msg.delete();
-            functions.generateGameMessages(msgChannel);
-            functions.generateColourMessages(msgChannel);
-            functions.generateMiscMessages(msgChannel);
+            functions.generateGameMessages(bot, msgChannel);
+            functions.generateColourMessages(bot, msgChannel);
+            functions.generateMiscMessages(bot, msgChannel);
           }
         case 'delMsg':
           if (input.length === 2) {
@@ -84,22 +84,22 @@ bot.on('message', (msg) => {
           if (input.length === 2) {
             msg.delete();
             if (input[1] === 'vote') {
-              functions.generateAmongUsVoteMessage(msgChannel);
+              functions.generateAmongUsVoteMessage(bot, msgChannel);
             } else if (input[1] === 'settings') {
-              functions.generateAmongUsSettingsMessage(msgChannel);
+              functions.generateAmongUsSettingsMessage(bot, msgChannel);
             }
           }
           break;
         case 'invite':
           if (input.length === 1) {
             msg.delete();
-            functions.generateInviteLinkMessage(msgChannel);
+            functions.generateInviteLinkMessage(bot, msgChannel);
           }
           break;
         case 'help':
           if (input.length === 1) {
             msg.delete();
-            functions.generateModHelpMessage(msgChannel);
+            functions.generateModHelpMessage(bot, msgChannel);
           }
           break;
       }
@@ -110,16 +110,16 @@ bot.on('message', (msg) => {
             if (input.length === 2) {
               msg.delete();
               if (input[1] === 'vote') {
-                functions.generateAmongUsVoteMessage(msgChannel);
+                functions.generateAmongUsVoteMessage(bot, msgChannel);
               } else if (input[1] === 'settings') {
-                functions.generateAmongUsSettingsMessage(msgChannel);
+                functions.generateAmongUsSettingsMessage(bot, msgChannel);
               }
             }
             break;
           case 'help':
             if (input.length === 1) {
               msg.delete();
-              functions.generateHelpMessage(msgChannel);
+              functions.generateHelpMessage(bot, msgChannel);
             }
             break;
         }

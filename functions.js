@@ -1,5 +1,5 @@
 module.exports = {
-    generateGameMessages: function(channel) {
+    generateGameMessages: function(bot, channel) {
         bot.channels.cache.get(channel).send(`**Game roles:**`);
         gRoles.forEach((role) => {
           bot.channels.cache
@@ -13,7 +13,7 @@ module.exports = {
         bot.channels.cache.get(channel).send(`\u200B`);
     },
 
-    generateColourMessages : function(channel) {
+    generateColourMessages : function(bot, channel) {
         bot.channels.cache.get(channel).send(`**Colour roles:**`);
         cRoles.forEach((role) => {
           bot.channels.cache
@@ -27,7 +27,7 @@ module.exports = {
         bot.channels.cache.get(channel).send(`\u200B`);
     },
 
-    generateMiscMessages : function(channel) {
+    generateMiscMessages : function(bot, channel) {
         bot.channels.cache.get(channel).send(`**Misc. roles:**`);
         mRoles.forEach((role) => {
           bot.channels.cache
@@ -41,7 +41,7 @@ module.exports = {
         bot.channels.cache.get(channel).send(`\u200B`);
     },
 
-    generateRoleMessage : function(role, channel) {
+    generateRoleMessage : function(bot, role, channel) {
         bot.channels.cache
           .get(channel)
           .send(`React below to get the \`\`${role}\`\` role!`)
@@ -51,7 +51,7 @@ module.exports = {
         });
     },
 
-    generateAmongUsVoteMessage : function(channel) {
+    generateAmongUsVoteMessage : function(bot, channel) {
         bot.channels.cache
           .get(channel)
           .send(`\`\`\`python\n    | I live| 2 Impostors| 1 Impostor   |
@@ -67,7 +67,7 @@ module.exports = {
           +-------+-------------+-------------+\`\`\``);
     },
 
-    generateAmongUsSettingsMessage : function(channel) {
+    generateAmongUsSettingsMessage : function(bot, channel) {
         bot.channels.cache
           .get(channel)
           .send(`Impostors: 2
@@ -88,7 +88,7 @@ module.exports = {
           Short Tasks: 5`);
     },
 
-    generateHelpMessage : function(channel) {
+    generateHelpMessage : function(bot, channel) {
         bot.channels.cache
           .get(channel)
           .send(`\`\`\`
@@ -97,7 +97,7 @@ module.exports = {
           \`\`\``)
     },
 
-    generateModHelpMessage : function(channel) {
+    generateModHelpMessage : function(bot, channel) {
         bot.channels.cache
           .get(channel)
           .send(`\`\`\`
@@ -115,7 +115,7 @@ module.exports = {
           \`\`\``)
     },
 
-    generateInviteLinkMessage: function(channel) {
+    generateInviteLinkMessage: function(bot, channel) {
         bot.channels.cache
           .get(channel)
           .send(`https://discord.gg/tcynfwG`);
