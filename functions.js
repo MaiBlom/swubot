@@ -1,3 +1,5 @@
+const { gRoles, mRoles, cRoles } = require('./roles.js');
+
 module.exports = {
     generateGameMessages: function(bot, channel) {
         bot.channels.cache.get(channel).send(`**Game roles:**`);

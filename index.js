@@ -6,7 +6,6 @@ const bot = new Discord.Client({
   partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
   ws: { intents: ['GUILDS', 'GUILD_PRESENCES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'] }
 });
-const { gRoles, mRoles, cRoles } = require('./roles.js');
 
 bot.on('ready', () => {
   console.log(`Connected as ${bot.user.id}`);
