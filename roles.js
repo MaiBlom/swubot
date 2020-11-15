@@ -1,7 +1,8 @@
 const gRoles = [
-  'Among Us',
+  'Amongus',
   'Brætspil',
   'Civilization',
+  'COD',
   'CSGO',
   'Dungeons & Dragons',
   'Jackbox',
