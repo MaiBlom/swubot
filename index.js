@@ -21,7 +21,7 @@ bot.on('ready', () => {
 
     console.log('\nRoles:');
     guild.roles.cache.forEach((roles) => {
-      console.log(` - ${roles.name} ${roles.id}`);
+      console.log(` - ${roles.name} ${roles.id}`); 
     });
   });
 });

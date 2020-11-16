@@ -120,6 +120,6 @@ module.exports = {
     generateInviteLinkMessage: function(bot, channel) {
         bot.channels.cache
           .get(channel)
-          .send(`https://discord.gg/tcynfwG`);
+          .send(`https://discord.gg/ap4c7CcJxa`);
     }
 };
