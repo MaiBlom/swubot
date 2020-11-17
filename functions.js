@@ -56,7 +56,7 @@ module.exports = {
     generateAmongUsVoteMessage : function(bot, channel) {
         bot.channels.cache
           .get(channel)
-          .send(`\`\`\`python\n    | I live| 2 Impostors| 1 Impostor   |
+          .send(`\`\`\`python\n| I live| 2 Impostors| 1 Impostor   |
 +-------+-------------+-------------+
 | 3     | DØD         | ALTID Stem  |
 | 4     | DØD         | Ikk Stem    |
