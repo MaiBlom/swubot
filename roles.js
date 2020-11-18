@@ -16,7 +16,6 @@ const gRoles = [
   'Rocket League',
   'Switch',
   'Skribbl.io',
-  'Terraria',
   'TFT',
   'Valorant',
   'World of Warcraft',
