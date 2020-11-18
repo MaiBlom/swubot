@@ -76,7 +76,7 @@ module.exports = {
 Confirm ejects: OFF
 Emergency Meetings: 1
 Emergency Cooldown: 20s
-Discussion Time: 15s
+Discussion Time: 30s
 Voting Time: 120s
 Taskbar Update: INVISIBLE / MEETINGS
 Anonymous Voting: OFF
