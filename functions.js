@@ -78,7 +78,7 @@ Emergency Meetings: 1
 Emergency Cooldown: 20s
 Discussion Time: 30s
 Voting Time: 120s
-Taskbar Update: INVISIBLE / MEETINGS
+Taskbar Update: MEETINGS
 Anonymous Voting: OFF
 Player Speed: 1.0x
 Crewmate Vision: 0.5x
