@@ -77,13 +77,14 @@ Confirm ejects: OFF
 Emergency Meetings: 1
 Emergency Cooldown: 20s
 Discussion Time: 15s
-Vote: 120s
+Voting Time: 120s
+Taskbar Update: INVISIBLE / MEETINGS
+Anonymous Voting: OFF
 Player Speed: 1.0x
 Crewmate Vision: 0.5x
-Impostor Vision: 1.5x
+Impostor Vision: 1.25x
 Kill Cooldown: 30s
 Kill Distance: Short
-Task Bar Updates: Meetings
 Visual Tasks: Off
 Common Tasks: 2
 Long Tasks: 2
