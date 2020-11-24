@@ -133,6 +133,10 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   if (reaction.message.channel.id != 755502310355894432) return;
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message; 
+  
+  if (reaction.emoji == '✖') bot.channels.cache.get(reaction.message.channel.id).send(`✖ has been sent`);
+  else if (reaction.emoji == '✔') bot.channels.cache.get(reaction.message.channel.id).send(`✔ has been sent`);
+  else bot.channels.cache.get(reaction.message.channel.id).send(`Emoji not obtained`);
 
   if (reaction.partial) {
     try {
