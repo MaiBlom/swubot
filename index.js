@@ -134,6 +134,8 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   const member = reaction.message.guild.members.cache.get(user.id);
   const { guild } = reaction.message; 
   
+  bot.channels.cache.get(reaction.message.channel.id).send(`${reaction.emoji} has been sent.`);
+
   if (reaction.emoji === 780758285510115339) bot.channels.cache.get(reaction.message.channel.id).send(`✖ has been sent`);
   else if (reaction.emoji === 780758285510115339) bot.channels.cache.get(reaction.message.channel.id).send(`✔ has been sent`);
   else bot.channels.cache.get(reaction.message.channel.id).send(`Emoji not obtained`);
