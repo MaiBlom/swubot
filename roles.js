@@ -19,7 +19,7 @@ const gRoles = [
   'Valorant',
   'World of Warcraft',
 ];
-const mRoles = ['Artist', 'Boomer', 'DJ', 'Cinema'];
+const mRoles = ['Artist', 'Boomer', 'Cinema', 'DJ'];
 const cRoles = ['Green', 'Blue', 'Red', 'Orange', 'Purple', 'Yellow', 'Light Blue', 'Brown', 'Black', 'Grey', 'White', 'Pink', 'Lime Green'];
 
 module.exports = { gRoles, mRoles, cRoles };
