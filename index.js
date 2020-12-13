@@ -10,7 +10,7 @@ const bot = new Discord.Client({
 bot.on('ready', () => {
   console.log(`Connected as ${bot.user.id}`);
  
-  bot.user.setActivity('with kittens', { type: 'PLAYING' });
+  // bot.user.setActivity('with kittens', { type: 'PLAYING' });
 
   bot.guilds.cache.forEach((guild) => {
     console.log(guild.name);
