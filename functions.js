@@ -121,6 +121,6 @@ Short Tasks: 5`);
     generateInviteLinkMessage: function(bot, channel) {
         bot.channels.cache
           .get(channel)
-          .send(`https://discord.gg/ap4c7CcJxa`);
+          .send(process.env.INVITELINK);
     }
 };
