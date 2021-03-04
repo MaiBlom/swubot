@@ -39,7 +39,6 @@ bot.on('message', (msg) => {
       switch (input[0]) {
         case 'roleGen':
           if (input.length > 1) {
-            msg.delete();
             input.shift();
             const role = input.join(' ');
             functions.generateRoleMessage(bot, role, msgChannel);
@@ -47,32 +46,27 @@ bot.on('message', (msg) => {
           break;
         case 'gameGen':
           if (input.length === 1) {
-            msg.delete();
             functions.generateGameMessages(bot, msgChannel);
           }
           break;
         case 'colourGen':
           if (input.length === 1) {
-            msg.delete();
             functions.generateColourMessages(bot, msgChannel);
           }
           break;
         case 'miscGen':
           if (input.length === 1) {
-            msg.delete();
             functions.generateMiscMessages(bot, msgChannel);
           }
           break;
         case 'allGen':
           if(input.length === 1) {
-            msg.delete();
             functions.generateGameMessages(bot, msgChannel);
             functions.generateColourMessages(bot, msgChannel);
             functions.generateMiscMessages(bot, msgChannel);
           }
         case 'delMsg':
           if (input.length === 2) {
-            msg.delete();
             input.shift();
             let msgDelAmount = parseInt(input, 10);
             msg.channel.bulkDelete(msgDelAmount)
@@ -81,7 +75,6 @@ bot.on('message', (msg) => {
           break;
         case 'amongus':
           if (input.length === 2) {
-            msg.delete();
             if (input[1] === 'vote') {
               functions.generateAmongUsVoteMessage(bot, msgChannel);
             } else if (input[1] === 'settings') {
@@ -91,13 +84,11 @@ bot.on('message', (msg) => {
           break;
         case 'invite':
           if (input.length === 1) {
-            msg.delete();
             functions.generateInviteLinkMessage(bot, msgChannel);
           }
           break;
         case 'help':
           if (input.length === 1) {
-            msg.delete();
             functions.generateModHelpMessage(bot, msgChannel);
           }
           break;
@@ -107,7 +98,6 @@ bot.on('message', (msg) => {
         switch (input[0]) {
           case 'amongus':
             if (input.length === 2) {
-              msg.delete();
               if (input[1] === 'vote') {
                 functions.generateAmongUsVoteMessage(bot, msgChannel);
               } else if (input[1] === 'settings') {
@@ -117,7 +107,6 @@ bot.on('message', (msg) => {
             break;
           case 'help':
             if (input.length === 1) {
-              msg.delete();
               functions.generateHelpMessage(bot, msgChannel);
             }
             break;
