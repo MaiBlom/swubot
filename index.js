@@ -34,7 +34,7 @@ bot.on('message', (msg) => {
   if(typeof msgMemberRole === 'undefined') msgMemberRole = msg.guild.roles.cache.find((role) => role.name === 'Dummy');
 
   try {
-    if (msgMemberRole.name.valueOf() === 'Moderator' && input[0].charAt(0) === '&') {
+    if (msgMemberRole.name.valueOf() === 'Admin' && input[0].charAt(0) === '&') {
       input[0] = input[0].substring(1);
       switch (input[0]) {
         case 'roleGen':
